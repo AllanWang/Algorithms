@@ -6,7 +6,8 @@ let isMatch input regex =
   let isCharMatch input' regex' = if regex' = '.' then true else input' = regex' in
   let rec isMatch' input' regex' cache' = if isEmpty input' then isEmpty regex' || regex' = "*"
     else if isEmpty regex' then isEmpty input'
-    else
+    else (
+      print_string (input' ^ " : " ^ regex' ^ "\n");
       let i = String.get input' 0 in
       let r = String.get regex' 0 in
       match r with
@@ -17,6 +18,7 @@ let isMatch input regex =
             else isMatch' (trim input') (trim regex') cache' || isMatch' (trim input') regex' cache')
       | _ -> if not (isCharMatch i r) && (String.length regex' < 2 || String.get regex' 1 <> '*') then false
         else isMatch' (trim input') (trim regex') (Some r)
+        )
   in
   isMatch' input regex None
 

@@ -103,5 +103,4 @@ public class Solution {
 //        System.out.println(primes);
         return primes;
     }
-
 }
